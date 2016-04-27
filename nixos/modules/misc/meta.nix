@@ -57,7 +57,5 @@ in
     };
   };
 
-  config = {
-    meta.maintainers = singleton lib.maintainers.pierron;
-  };
+  meta.maintainers = singleton lib.maintainers.pierron;
 }

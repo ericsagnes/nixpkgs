@@ -50,7 +50,7 @@ in rec {
     modules = modules ++ extraModules ++ baseModules ++ [ pkgsModule ];
     args = extraArgs;
     specialArgs = { modulesPath = ../modules; } // specialArgs;
-  }) config options;
+  }) config options meta;
 
   # These are the extra arguments passed to every module.  In
   # particular, Nixpkgs is passed through the "pkgs" argument.

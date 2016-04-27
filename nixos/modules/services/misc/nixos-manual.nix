@@ -17,6 +17,21 @@ let
       nixpkgs.system = config.nixpkgs.system;
     };
 
+  scrubbedEval = evalModules {
+    modules = [ versionModule ] ++ baseModules;
+    args = (config._module.args) // { modules = [ ]; };
+    specialArgs = { pkgs = scrubDerivations "pkgs" pkgs; };
+  };
+  scrubDerivations = namePrefix: pkgSet: mapAttrs
+    (name: value:
+      let wholeName = "${namePrefix}.${name}"; in
+      if isAttrs value then
+        scrubDerivations wholeName value
+        // (optionalAttrs (isDerivation value) { outPath = "\${${wholeName}}"; })
+      else value
+    )
+    pkgSet;
+
   /* For the purpose of generating docs, evaluate options with each derivation
     in `pkgs` (recursively) replaced by a fake with path "\${pkgs.attribute.path}".
     It isn't perfect, but it seems to cover a vast majority of use cases.
@@ -24,25 +39,9 @@ let
     the path above will be shown and not e.g. `${config.services.foo.package}`. */
   manual = import ../../../doc/manual {
     inherit pkgs;
+    inherit (scrubbedEval) options meta;
     version = config.system.nixosVersion;
     revision = config.system.nixosRevision;
-    options =
-      let
-        scrubbedEval = evalModules {
-          modules = [ versionModule ] ++ baseModules;
-          args = (config._module.args) // { modules = [ ]; };
-          specialArgs = { pkgs = scrubDerivations "pkgs" pkgs; };
-        };
-        scrubDerivations = namePrefix: pkgSet: mapAttrs
-          (name: value:
-            let wholeName = "${namePrefix}.${name}"; in
-            if isAttrs value then
-              scrubDerivations wholeName value
-              // (optionalAttrs (isDerivation value) { outPath = "\${${wholeName}}"; })
-            else value
-          )
-          pkgSet;
-      in scrubbedEval.options;
   };
 
   entry = "${manual.manual}/share/doc/nixos/index.html";

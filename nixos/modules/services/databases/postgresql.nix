@@ -250,7 +250,8 @@ in
 
         unitConfig.RequiresMountsFor = "${cfg.dataDir}";
       };
+    };
 
-  };
+  meta.doc = ./postgresql.xml;
 
 }

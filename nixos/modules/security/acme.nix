@@ -202,9 +202,11 @@ in
       );
     })
 
-    { meta.maintainers = with lib.maintainers; [ abbradar fpletz globin ];
-      meta.doc = ./acme.xml;
-    }
   ];
+
+  meta = {
+    maintainers = with lib.maintainers; [ abbradar fpletz globin ];
+    doc = ./acme.xml;
+  };
 
 }

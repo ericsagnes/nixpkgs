@@ -57,6 +57,11 @@ rec {
 
       closed = closeModules (modules ++ [ internalModule ]) ({ inherit config options; lib = import ./.; } // specialArgs);
 
+      meta = let
+        filtered = filter (s: (attrByPath ["meta"] {} s) != {}) closed;
+        mergeFile = (s: s.meta // { file = s.file; });
+        in map mergeFile filtered;
+
       # Note: the list of modules is reversed to maintain backward
       # compatibility with the old module system.  Not sure if this is
       # the most sensible policy.
@@ -83,7 +88,7 @@ rec {
             res set._definedNames
         else
           res;
-      result = { inherit options config; };
+      result = { inherit options config meta; };
     in result;
 
   /* Close a set of modules under the ‘imports’ relation. */
@@ -106,7 +111,7 @@ rec {
      of ‘options’, ‘config’ and ‘imports’ attributes. */
   unifyModuleSyntax = file: key: m:
     if m ? config || m ? options then
-      let badAttrs = removeAttrs m ["imports" "options" "config" "key" "_file"]; in
+      let badAttrs = removeAttrs m ["imports" "options" "config" "key" "_file" "meta"]; in
       if badAttrs != {} then
         throw "Module `${key}' has an unsupported attribute `${head (attrNames badAttrs)}'. This is caused by assignments to the top-level attributes `config' or `options'."
       else
@@ -115,6 +120,7 @@ rec {
           imports = m.imports or [];
           options = m.options or {};
           config = m.config or {};
+          meta = m.meta or {};
         }
     else
       { file = m._file or file;

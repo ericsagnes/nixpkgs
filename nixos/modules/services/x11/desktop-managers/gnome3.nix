@@ -190,5 +190,8 @@ in {
 
   };
 
+  meta.tests = {
+    "gnome3" = ./tests/gnome3.nix;
+  };
 
 }

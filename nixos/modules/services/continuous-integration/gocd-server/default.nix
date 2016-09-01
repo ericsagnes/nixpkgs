@@ -180,4 +180,8 @@ in {
       };
     };
   };
+
+  meta.tests = {
+    gocd-server = ./test.nix;
+  };
 }

@@ -1,6 +1,6 @@
 # Test for NixOS' container support.
 
-import ./make-test.nix ({ pkgs, ...} : {
+{ pkgs, nixosFolder, ...} : {
   name = "containers-imperative";
   meta = with pkgs.stdenv.lib.maintainers; {
     maintainers = [ aristid aszlig eelco chaoflow kampfschlaefer ];
@@ -8,13 +8,13 @@ import ./make-test.nix ({ pkgs, ...} : {
 
   machine =
     { config, pkgs, lib, ... }:
-    { imports = [ ../modules/installer/cd-dvd/channel.nix ];
+    { imports = [ "${nixosFolder}/modules/installer/cd-dvd/channel.nix" ];
       virtualisation.writableStore = true;
       virtualisation.memorySize = 768;
       # Make sure we always have all the required dependencies for creating a
       # container available within the VM, because we don't have network access.
       virtualisation.pathsInNixDB = let
-        emptyContainer = import ../lib/eval-config.nix {
+        emptyContainer = import "${nixosFolder}/lib/eval-config.nix" {
           inherit (config.nixpkgs) system;
           modules = lib.singleton {
             containers.foo.config = {};
@@ -93,4 +93,4 @@ import ./make-test.nix ({ pkgs, ...} : {
       );
     '';
 
-})
+}

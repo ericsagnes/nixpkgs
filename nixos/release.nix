@@ -275,7 +275,6 @@ in rec {
   tests.hibernate = callTest tests/hibernate.nix {};
   tests.installer = callSubTests tests/installer.nix {};
   tests.ipv6 = callTest tests/ipv6.nix {};
-  tests.kde4 = callTest tests/kde4.nix {};
   tests.keymap = callSubTests tests/keymap.nix {};
   tests.initrdNetwork = callTest tests/initrd-network.nix {};
   tests.kubernetes = hydraJob (import tests/kubernetes.nix { system = "x86_64-linux"; });

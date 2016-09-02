@@ -1,4 +1,4 @@
-import ./make-test.nix ({ pkgs, ... }: {
+{ pkgs, nixosFolder, ... }: {
   name = "kde4";
   meta = with pkgs.stdenv.lib.maintainers; {
     maintainers = [ domenkozar eelco chaoflow ];
@@ -7,7 +7,7 @@ import ./make-test.nix ({ pkgs, ... }: {
   machine =
     { config, pkgs, ... }:
 
-    { imports = [ ./common/user-account.nix ];
+    { imports = [ "${nixosFolder}/tests/common/user-account.nix" ];
 
       virtualisation.memorySize = 1024;
 
@@ -67,4 +67,4 @@ import ./make-test.nix ({ pkgs, ... }: {
       $machine->screenshot("screen");
     '';
 
-})
+}

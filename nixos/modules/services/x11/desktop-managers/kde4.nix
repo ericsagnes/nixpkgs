@@ -179,4 +179,8 @@ in
 
   };
 
+  meta.tests = {
+    kde4 = ./tests/kde4.nix;
+  };
+
 }

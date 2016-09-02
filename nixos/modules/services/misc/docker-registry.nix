@@ -78,4 +78,8 @@ in {
       uid = config.ids.uids.docker-registry;
     };
   };
+
+  meta.tests = {
+    dockerRegistry = ./tests/docker-registry.nix;
+  };
 }

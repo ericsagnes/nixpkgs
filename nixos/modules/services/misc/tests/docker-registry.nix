@@ -1,6 +1,6 @@
 # This test runs docker-registry and check if it works
 
-import ./make-test.nix ({ pkgs, ...} : {
+{ pkgs, ...} : {
   name = "docker-registry";
   meta = with pkgs.stdenv.lib.maintainers; {
     maintainers = [ offline ];
@@ -40,4 +40,4 @@ import ./make-test.nix ({ pkgs, ...} : {
     $client2->succeed("docker pull registry:8080/scratch");
     $client2->succeed("docker images | grep scratch");
   '';
-})
+}

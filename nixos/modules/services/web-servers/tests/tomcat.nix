@@ -1,4 +1,4 @@
-import ./make-test.nix ({ pkgs, ...} : {
+{ pkgs, ...} : {
   name = "tomcat";
   meta = with pkgs.stdenv.lib.maintainers; {
     maintainers = [ eelco chaoflow ];
@@ -28,4 +28,4 @@ import ./make-test.nix ({ pkgs, ...} : {
     $client->succeed("curl --fail http://server/examples/servlets/servlet/HelloWorldExample");
     $client->succeed("curl --fail http://server/examples/jsp/jsp2/simpletag/hello.jsp");
   '';
-})
+}

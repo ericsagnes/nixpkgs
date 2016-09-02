@@ -1,6 +1,6 @@
-{ pkgs, system ? builtins.currentSystem, ... }:
+{ pkgs, nixpkgsFolder, system ? builtins.currentSystem, ... }:
 
-with import ../lib/testing.nix { inherit system; };
+with import "${nixpkgsFolder}/lib/testing/testing.nix" { inherit system; };
 
 runInMachine {
   drv = pkgs.hello;

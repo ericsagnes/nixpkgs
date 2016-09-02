@@ -1,4 +1,4 @@
-import ./make-test.nix ({ pkgs, ...} :
+{ pkgs, nixosFolder, ...} :
 
 {
   name = "sddm";
@@ -7,7 +7,7 @@ import ./make-test.nix ({ pkgs, ...} :
   };
 
   machine = { lib, ... }: {
-    imports = [ ./common/user-account.nix ];
+    imports = [ "${nixosFolder}/tests/common/user-account.nix" ];
     virtualisation.memorySize = 1024;
     services.xserver.enable = true;
     services.xserver.displayManager.sddm = {
@@ -51,4 +51,4 @@ import ./make-test.nix ({ pkgs, ...} :
     $machine->execute("${xdo} key Alt+F1 sleep 10");
     $machine->screenshot("screen");
   '';
-})
+}

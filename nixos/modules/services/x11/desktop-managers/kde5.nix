@@ -225,4 +225,8 @@ in
 
   };
 
+  meta.tests = {
+    sddm-kde5 = ./tests/sddm-kde5.nix;
+  };
+
 }

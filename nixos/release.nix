@@ -299,7 +299,6 @@ in rec {
   tests.runInMachine = callTest tests/run-in-machine.nix {};
   tests.simple = callTest tests/simple.nix {};
   tests.virtualbox = callSubTests tests/virtualbox.nix { system = "x86_64-linux"; };
-  tests.xfce = callTest tests/xfce.nix {};
   tests.module = moduleTests {
     cadvisor = { systems = [ "x86_64-linux" ]; };
     kubernetes = { systems = [ "x86_64-linux" ]; };

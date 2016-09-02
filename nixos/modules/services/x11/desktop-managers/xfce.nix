@@ -117,4 +117,8 @@ in
 
   };
 
+  meta.tests = {
+    xfce = ./tests/xfce.nix;
+  };
+
 }

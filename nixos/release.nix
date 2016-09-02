@@ -295,7 +295,6 @@ in rec {
   tests.panamax = hydraJob (import tests/panamax.nix { system = "x86_64-linux"; });
   tests.printing = callTest tests/printing.nix {};
   tests.proxy = callTest tests/proxy.nix {};
-  tests.pumpio = callTest tests/pump.io.nix {};
   tests.quake3 = callTest tests/quake3.nix {};
   tests.runInMachine = callTest tests/run-in-machine.nix {};
   tests.sddm = callTest tests/sddm.nix {};

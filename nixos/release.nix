@@ -267,7 +267,6 @@ in rec {
   tests.ec2-config = hydraJob (import tests/ec2.nix { system = "x86_64-linux"; }).boot-ec2-config;
   tests.firefox = callTest tests/firefox.nix {};
   tests.firewall = callTest tests/firewall.nix {};
-  tests.fleet = hydraJob (import tests/fleet.nix { system = "x86_64-linux"; });
   #tests.gitlab = callTest tests/gitlab.nix {};
   tests.hibernate = callTest tests/hibernate.nix {};
   tests.installer = callSubTests tests/installer.nix {};
@@ -302,6 +301,7 @@ in rec {
     docker = { systems = [ "x86_64-linux" ]; };
     dockerRegistry = { systems = [ "x86_64-linux" ]; };
     etcd = { systems = [ "x86_64-linux" ]; };
+    fleet = { systems = [ "x86_64-linux" ]; };
   };
 
   /* Build a bunch of typical closures so that Hydra can keep track of

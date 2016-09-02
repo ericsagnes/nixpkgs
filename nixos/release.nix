@@ -283,7 +283,6 @@ in rec {
   #tests.logstash = callTest tests/logstash.nix {};
   tests.misc = callTest tests/misc.nix {};
   tests.mumble = callTest tests/mumble.nix {};
-  tests.munin = callTest tests/munin.nix {};
   tests.mysql = callTest tests/mysql.nix {};
   tests.mysqlReplication = callTest tests/mysql-replication.nix {};
   tests.nat.firewall = callTest tests/nat.nix { withFirewall = true; };

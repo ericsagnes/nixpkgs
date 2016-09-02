@@ -1,6 +1,6 @@
 # This test runs influxdb and checks if influxdb is up and running
 
-import ./make-test.nix ({ pkgs, ...} : {
+{ pkgs, ...} : {
   name = "influxdb";
   meta = with pkgs.stdenv.lib.maintainers; {
     maintainers = [ chaoflow offline ];
@@ -36,4 +36,4 @@ import ./make-test.nix ({ pkgs, ...} : {
         --data-urlencode 'q=select * from foo limit 1' | grep 6666
     ~);
   '';
-})
+}

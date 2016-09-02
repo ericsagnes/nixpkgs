@@ -298,7 +298,6 @@ in rec {
   tests.quake3 = callTest tests/quake3.nix {};
   tests.runInMachine = callTest tests/run-in-machine.nix {};
   tests.simple = callTest tests/simple.nix {};
-  tests.udisks2 = callTest tests/udisks2.nix {};
   tests.virtualbox = callSubTests tests/virtualbox.nix { system = "x86_64-linux"; };
   tests.xfce = callTest tests/xfce.nix {};
   tests.module = moduleTests {

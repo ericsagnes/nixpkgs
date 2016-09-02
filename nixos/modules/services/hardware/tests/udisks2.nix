@@ -1,4 +1,4 @@
-import ./make-test.nix ({ pkgs, ... }:
+{ pkgs, nixosFolder, ... }:
 
 let
 
@@ -18,7 +18,7 @@ in
   machine =
     { config, pkgs, ... }:
     { services.udisks2.enable = true;
-      imports = [ ./common/user-account.nix ];
+      imports = [ "${nixosFolder}/tests/common/user-account.nix" ];
 
       security.polkit.extraConfig =
         ''
@@ -57,4 +57,4 @@ in
       $machine->fail("[ -e /dev/sda ]");
     '';
 
-})
+}
